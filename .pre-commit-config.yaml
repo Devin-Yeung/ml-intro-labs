@@ -5,7 +5,7 @@ repos:
         name: Remove jupyter running result
         entry: jupyter
         language: system
-        files: '[examples|ready]/.*\.ipynb'
+        files: '.*/.*\.ipynb'
         args: [
           "nbconvert",
           "--ClearOutputPreprocessor.enabled=True",
