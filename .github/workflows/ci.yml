@@ -15,14 +15,39 @@ jobs:
         shell: bash -el {0}
     steps:
       - uses: actions/checkout@v3
+
       - uses: conda-incubator/setup-miniconda@v2.2.0
         with:
           mamba-version: "*"
           channels: conda-forge,defaults
           channel-priority: true
-          environment-file: environment.yml
+          # environment-file: environment.yml
           activate-environment: ml-lab
           auto-activate-base: false
+          use-mamba: true
+
+      - name: Conda Info
+        id: conda-info
+        run: |
+          echo "today=$(/bin/date -u '+%Y%m%d')" >> $GITHUB_OUTPUT
+          echo "conda_base=$(conda info --base)" >> $GITHUB_OUTPUT
+        shell: bash
+
+      - name: Cache Conda env
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.conda-info.outputs.conda_base }}/envs
+          key:
+            conda-${{ runner.os }}--${{ runner.arch }}--${{ steps.conda-info.outputs.today }}-${{ hashFiles('environment.yml') }}-${{ env.CACHE_NUMBER }}
+        env:
+          # Increase this value to reset cache if environment.yml has not changed
+          CACHE_NUMBER: 0
+        id: cache
+
+      - name: Update environment
+        run: mamba env update -n ml-lab -f environment.yml
+        if: steps.cache.outputs.cache-hit != 'true'
+
       - name: Run all notebooks
         run: |
           jupyter nbconvert --to notebook --execute **/*.ipynb
