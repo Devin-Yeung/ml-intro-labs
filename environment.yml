@@ -1,0 +1,14 @@
+name: ml-lab
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.8.17
+  - jupyter
+  - matplotlib
+  - pandas
+  - scikit-learn
+  - numpy
+  - seaborn
+  - pre-commit
+  - "black[jupyter]"
