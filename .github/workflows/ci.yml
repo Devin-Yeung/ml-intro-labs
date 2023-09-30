@@ -1,0 +1,28 @@
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+name: CI
+jobs:
+  run-notebooks:
+    name: Run all notebooks
+    runs-on: "ubuntu-latest"
+    defaults:
+      run:
+        shell: bash -el {0}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: conda-incubator/setup-miniconda@v2.2.0
+        with:
+          mamba-version: "*"
+          channels: conda-forge,defaults
+          channel-priority: true
+          environment-file: environment.yml
+          activate-environment: ml-lab
+          auto-activate-base: false
+      - name: Run all notebooks
+        run: |
+          jupyter nbconvert --to notebook --execute **/*.ipynb
