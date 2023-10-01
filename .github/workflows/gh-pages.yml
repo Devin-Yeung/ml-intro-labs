@@ -52,6 +52,7 @@ jobs:
       - name: Run all notebooks
         run: |
           python utils/gh-pages.py
+          python utils/gen-index.py
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3

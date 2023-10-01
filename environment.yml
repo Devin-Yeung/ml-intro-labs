@@ -12,3 +12,4 @@ dependencies:
   - seaborn
   - pre-commit
   - "black[jupyter]"
+  - jinja2
