@@ -1,0 +1,63 @@
+on:
+  push:
+    branches: [ master ]
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+name: Deploy
+jobs:
+  build-gh-pages:
+    name: deploy gh-pages
+    runs-on: "ubuntu-latest"
+    permissions:
+      contents: write
+    defaults:
+      run:
+        shell: bash -el {0}
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: conda-incubator/setup-miniconda@v2.2.0
+        with:
+          mamba-version: "*"
+          channels: conda-forge,defaults
+          channel-priority: true
+          # environment-file: environment.yml
+          activate-environment: ml-lab
+          auto-activate-base: false
+          use-mamba: true
+
+      - name: Conda Info
+        id: conda-info
+        run: |
+          echo "today=$(/bin/date -u '+%Y%m%d')" >> $GITHUB_OUTPUT
+          echo "conda_base=$(conda info --base)" >> $GITHUB_OUTPUT
+        shell: bash
+
+      - name: Cache Conda env
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.conda-info.outputs.conda_base }}/envs
+          key:
+            conda-${{ runner.os }}--${{ runner.arch }}--${{ steps.conda-info.outputs.today }}-${{ hashFiles('environment.yml') }}-${{ env.CACHE_NUMBER }}
+        env:
+          # Increase this value to reset cache if environment.yml has not changed
+          CACHE_NUMBER: 0
+        id: cache
+
+      - name: Update environment
+        run: mamba env update -n ml-lab -f environment.yml
+        if: steps.cache.outputs.cache-hit != 'true'
+
+      - name: Run all notebooks
+        run: |
+          python utils/gh-pages.py
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        if: github.ref == 'refs/heads/master'
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
+          publish_dir: ./build
