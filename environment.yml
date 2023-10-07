@@ -13,3 +13,4 @@ dependencies:
   - pre-commit
   - "black[jupyter]"
   - jinja2
+  - jupytext
