@@ -1,4 +1,6 @@
 on:
+  schedule:
+    - cron: "0 16 * * *" # 0:00 Asia/Shanghai
   push:
     branches: [ master ]
   pull_request:
