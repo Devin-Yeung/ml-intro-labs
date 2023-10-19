@@ -19,13 +19,13 @@ jobs:
 
       - uses: conda-incubator/setup-miniconda@v2.2.0
         with:
-          mamba-version: "*"
+          # mamba-version: "*"
           channels: conda-forge,defaults
           channel-priority: true
           # environment-file: environment.yml
           activate-environment: ml-lab
           auto-activate-base: false
-          use-mamba: true
+          # use-mamba: true
 
       - name: Conda Info
         id: conda-info
