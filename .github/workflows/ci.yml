@@ -26,7 +26,7 @@ jobs:
           # environment-file: environment.yml
           activate-environment: ml-lab
           auto-activate-base: false
-          use-mamba: true
+          use-mamba: false
 
       - name: Conda Info
         id: conda-info
