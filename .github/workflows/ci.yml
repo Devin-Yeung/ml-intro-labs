@@ -20,13 +20,13 @@ jobs:
 
       - uses: conda-incubator/setup-miniconda@v2.2.0
         with:
-          # mamba-version: "*"
           channels: conda-forge,defaults
           channel-priority: true
           # environment-file: environment.yml
           activate-environment: ml-lab
           auto-activate-base: false
-          use-mamba: false
+          use-mamba: true
+          miniforge-version: latest
 
       - name: Conda Info
         id: conda-info
@@ -47,7 +47,7 @@ jobs:
         id: cache
 
       - name: Update environment
-        run: conda env update -n ml-lab -f environment.yml
+        run: mamba env update -n ml-lab -f environment.yml
         if: steps.cache.outputs.cache-hit != 'true'
 
       - name: Run all notebooks
