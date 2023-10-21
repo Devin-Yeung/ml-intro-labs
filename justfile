@@ -3,6 +3,7 @@ STUID := env_var_or_default('STUID', "")
 LAB2-1_SUBMIT := "submit" / "2.1-Exercise" + "_" + STUID
 LAB2-2_SUBMIT := "submit" / "2.2-Exercise" + "_" + STUID
 LAB6-1_SUBMIT := "submit" / "6.1-Exercise" + "_" + STUID
+LAB6-2_SUBMIT := "submit" / "6.2-Exercise" + "_" + STUID
 
 lab2-1:
     mkdir -p {{LAB2-1_SUBMIT}}
@@ -25,6 +26,13 @@ lab6-1:
     rm -rf {{LAB6-1_SUBMIT}}/*
     jupytext "lab6/logistic-regression.ipynb" --to py:nomarker -o "{{LAB6-1_SUBMIT}}/6.1-Exercise-Logistic-Regression.py"
     cd submit && zip -r 6.1-Exercise_{{STUID}}.zip 6.1-Exercise_{{STUID}}
+
+lab6-2:
+    mkdir -p {{LAB6-2_SUBMIT}}
+    rm -rf {{LAB6-2_SUBMIT}}/*
+    cp "lab6/diabetes.csv" "{{LAB6-2_SUBMIT}}"
+    jupytext "lab6/decision-tree.ipynb" --to py:nomarker -o "{{LAB6-2_SUBMIT}}/6.2-Exercise-Decision-Tree.py"
+    cd submit && zip -r 6.2-Exercise_{{STUID}}.zip 6.2-Exercise_{{STUID}}
 
 clean-submit:
     rm -rf submit/*
