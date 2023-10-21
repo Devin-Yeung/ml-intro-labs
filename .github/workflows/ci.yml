@@ -50,6 +50,9 @@ jobs:
         run: mamba env update -n ml-lab -f environment.yml
         if: steps.cache.outputs.cache-hit != 'true'
 
+      - name: Install Utils
+        run: sudo apt install graphviz
+
       - name: Run all notebooks
         run: |
           jupyter nbconvert --to notebook --execute **/*.ipynb
