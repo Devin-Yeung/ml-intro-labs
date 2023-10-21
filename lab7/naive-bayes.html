@@ -7839,13 +7839,13 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In [13]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-python"><pre><span></span><span class="n">X_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([[</span><span class="s1">'overcast'</span><span class="p">,</span> <span class="s1">'cool'</span><span class="p">,</span> <span class="s1">'normal'</span><span class="p">,</span> <span class="s1">'false'</span><span class="p">]])</span>
+<div class="highlight hl-python"><pre><span></span><span class="n">X_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">'outlook'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'overcast'</span><span class="p">],</span> <span class="s1">'temp'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'cool'</span><span class="p">],</span> <span class="s1">'humidity'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'normal'</span><span class="p">],</span> <span class="s1">'windy'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'false'</span><span class="p">]})</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=4e63e00b25219340">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=4e63e00b25219340">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7855,20 +7855,6 @@ a.anchor-link {
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-python"><pre><span></span><span class="n">X_test</span> <span class="o">=</span> <span class="n">feature_encoder</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
 </pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>/usr/share/miniconda3/envs/ml-lab/lib/python3.8/site-packages/sklearn/base.py:465: UserWarning: X does not have valid feature names, but OneHotEncoder was fitted with feature names
-  warnings.warn(
-</pre>
 </div>
 </div>
 </div>
