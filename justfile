@@ -6,6 +6,7 @@ LAB6-1_SUBMIT := "submit" / "6.1-Exercise" + "_" + STUID
 LAB6-2_SUBMIT := "submit" / "6.2-Exercise" + "_" + STUID
 LAB7-1_SUBMIT := "submit" / "7.1-Exercise" + "_" + STUID
 LAB7-2_SUBMIT := "submit" / "7.2-Exercise" + "_" + STUID
+LAB7-3_SUBMIT := "submit" / "7.3-Exercise" + "_" + STUID
 
 lab2-1:
     mkdir -p {{LAB2-1_SUBMIT}}
@@ -39,11 +40,15 @@ lab6-2:
 lab7:
     mkdir -p {{LAB7-1_SUBMIT}}
     mkdir -p {{LAB7-2_SUBMIT}}
+    mkdir -p {{LAB7-3_SUBMIT}}
     cp "lab7/consumer_record.csv" "{{LAB7-1_SUBMIT}}"
     cp "lab7/basketball.csv" "{{LAB7-2_SUBMIT}}"
+    cp "lab7/svm_dataset.csv" "{{LAB7-3_SUBMIT}}"
     jupytext "lab7/knn.ipynb" --to py:nomarker -o "{{LAB7-1_SUBMIT}}/7.1-Exercise-Knn.py"
     jupytext "lab7/naive-bayes.ipynb" --to py:nomarker -o "{{LAB7-2_SUBMIT}}/7.2-Exercise-NB.py"
+    jupytext "lab7/svm.ipynb" --to py:nomarker -o "{{LAB7-3_SUBMIT}}/7.3-Exercise-linear-SVM.py"
     cd submit && zip -r 7-Exercise_{{STUID}}.zip 7.1-Exercise_{{STUID}} 7.2-Exercise_{{STUID}}
+    cd submit && zip -r 7.3-Exercise_{{STUID}}.zip 7.3-Exercise_{{STUID}}
 
 
 clean-submit:
