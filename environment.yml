@@ -15,3 +15,4 @@ dependencies:
   - jinja2
   - jupytext
   - python-graphviz
+  - tensorflow
