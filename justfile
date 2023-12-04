@@ -8,6 +8,7 @@ LAB7-1_SUBMIT := "submit" / "7.1-Exercise" + "_" + STUID
 LAB7-2_SUBMIT := "submit" / "7.2-Exercise" + "_" + STUID
 LAB7-3_SUBMIT := "submit" / "7.3-Exercise" + "_" + STUID
 LAB8-1_SUBMIT := "submit" / "8.1-Exercise" + "_" + STUID
+LAB8-2_SUBMIT := "submit" / "8.2-Exercise" + "_" + STUID
 
 lab2-1:
     mkdir -p {{LAB2-1_SUBMIT}}
@@ -53,9 +54,13 @@ lab7:
 
 lab8:
     mkdir -p {{LAB8-1_SUBMIT}}
+    mkdir -p {{LAB8-2_SUBMIT}}
     cp "lab8/hierarchical-shopping-data.csv" "{{LAB8-1_SUBMIT}}"
     jupytext "lab8/cluster.ipynb" --to py:nomarker -o "{{LAB8-1_SUBMIT}}/8.1.Exercise-hierarchical-clustering.py"
+    cp "lab8/iris.data" "{{LAB8-2_SUBMIT}}"
+    jupytext "lab8/pca.ipynb" --to py:nomarker -o "{{LAB8-2_SUBMIT}}/8.2.Exercise-PCA.py"
     cd submit && zip -r 8.1-Exercise_{{STUID}}.zip 8.1-Exercise_{{STUID}}
+    cd submit && zip -r 8.2-Exercise_{{STUID}}.zip 8.2-Exercise_{{STUID}}
 
 
 clean-submit:
