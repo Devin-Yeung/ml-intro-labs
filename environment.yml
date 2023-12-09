@@ -16,3 +16,4 @@ dependencies:
   - jupytext
   - python-graphviz
   - tensorflow
+  - d2l
