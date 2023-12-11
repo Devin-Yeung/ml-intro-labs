@@ -9,6 +9,8 @@ LAB7-2_SUBMIT := "submit" / "7.2-Exercise" + "_" + STUID
 LAB7-3_SUBMIT := "submit" / "7.3-Exercise" + "_" + STUID
 LAB8-1_SUBMIT := "submit" / "8.1-Exercise" + "_" + STUID
 LAB8-2_SUBMIT := "submit" / "8.2-Exercise" + "_" + STUID
+LAB9_SUBMIT := "submit" / "9.1-Exercise" + "_" + STUID
+LAB10-1_SUBMIT := "submit" / "10.1-MLP Exercise" + "_" + STUID
 
 lab2-1:
     mkdir -p {{LAB2-1_SUBMIT}}
@@ -62,6 +64,17 @@ lab8:
     cd submit && zip -r 8.1-Exercise_{{STUID}}.zip 8.1-Exercise_{{STUID}}
     cd submit && zip -r 8.2-Exercise_{{STUID}}.zip 8.2-Exercise_{{STUID}}
 
+lab9:
+    mkdir -p {{LAB9_SUBMIT}}
+    rm -rf {{LAB9_SUBMIT}}/*
+    cp "lab9/mnist.ipynb" "{{LAB9_SUBMIT}}/IML#Lab9.1 tensorflow minist.ipynb"
+    cd submit && zip -r 9.1-Exercise_{{STUID}}.zip 9.1-Exercise_{{STUID}}
+
+lab10-1:
+    mkdir -p "{{LAB10-1_SUBMIT}}"
+    rm -rf "{{LAB10-1_SUBMIT}}/*"
+    cp "lab10/fashion-mnist.ipynb" "{{LAB10-1_SUBMIT}}/IML#Lab10.1 tensorflow fashion minist.ipynb"
+    cd submit && zip -r "10.1-MLP Exercise_{{STUID}}.zip" "10.1-MLP Exercise_{{STUID}}"
 
 clean-submit:
     rm -rf submit/*
